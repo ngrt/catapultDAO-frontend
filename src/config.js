@@ -1,0 +1,28 @@
+const data = {
+  "DEVO": {
+    "CHAIN_ID": 1337,
+    "RPC": "http://127.0.0.1:8545",
+    "FACTORY_ADDRESS": '0x0165878A594ca255338adfa4d48449f69242Eb8F',
+    "STABLE_TOKEN_ADDRESS": '0xa7d7079b0fead91f3e65f86e8915cb59c1a4c664',
+    "NATIVE_DECIMAL": '18',
+    "STABLE_DECIMAL": '6',
+  },
+  "BETA": {
+    "CHAIN_ID": 1337,
+    "RPC": "http://127.0.0.1:8545",
+    "FACTORY_ADDRESS": '0x0165878A594ca255338adfa4d48449f69242Eb8F',
+    "STABLE_TOKEN_ADDRESS": '0xa7d7079b0fead91f3e65f86e8915cb59c1a4c664',
+    "NATIVE_DECIMAL": '18',
+    "STABLE_DECIMAL": '6',
+  },
+  "PROD": {
+    "CHAIN_ID": 1337,
+    "RPC": "http://127.0.0.1:8545",
+    "FACTORY_ADDRESS": '0x0165878A594ca255338adfa4d48449f69242Eb8F',
+    "STABLE_TOKEN_ADDRESS": '0xa7d7079b0fead91f3e65f86e8915cb59c1a4c664',
+    "NATIVE_DECIMAL": '18',
+    "STABLE_DECIMAL": '6',
+  }
+}
+
+export default data
