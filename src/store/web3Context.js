@@ -18,6 +18,8 @@ const Web3Context = React.createContext({
     initWeb3Modal: () => {},
     createDAO: () => {},
     getInvestment: () => {},
+    doParticipate: () => {},
+    participation: null,
     investment: null
 });
 
@@ -26,6 +28,7 @@ export const Web3ContextProvider = (props) => {
     const [signer, setSigner] = useState(null);
     const [investment, setInvestment] = useState(null);
     const [investmentDAO, setInvestmentDAO] = useState(null);
+    const [participation, setParticipation] = useState(null);
     const [factoryContract, setFactoryContract] = useState(null);
     const [loading, setLoading] = useState(false);
     const [loadingDAO, setLoadingDAO] = useState(false);
@@ -61,18 +64,6 @@ export const Web3ContextProvider = (props) => {
 
         !web3 && initUrlWeb3()
     }, [web3]);
-
-    const disconnect = async () => {
-        try {
-            if (web3.close) {
-                await web3.close();
-                await Web3Modal.clearCachedProvider();
-                setWeb3(null);
-            }
-        } catch (e) {
-            console.log(e);
-        }
-    }
 
     const initWeb3Modal = async () => {
         try {
@@ -119,6 +110,20 @@ export const Web3ContextProvider = (props) => {
         }
     }
 
+    const doParticipate = async (amount) => {
+        try {
+            await factoryContract.createDAOFunding(10);
+            const addr = await signer.getAddress();
+            setParticipation({
+                key: 1,
+                address: addr,
+                amount
+            });
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     const getInvestments = async (i) => {
         try {
             const invest = await factoryContract.investments(i);
@@ -155,7 +160,9 @@ export const Web3ContextProvider = (props) => {
                 approve,
                 initWeb3Modal,
                 createDAO,
-                investment
+                investment,
+                participation,
+                doParticipate
             }}>
             {props.children}
         </Web3Context.Provider>

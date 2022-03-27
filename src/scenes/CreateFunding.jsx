@@ -17,7 +17,8 @@ const CreateFunding = (props) => {
   const [redirctTo, setRedirctTo] = useState(false);
   const [componentName, setComponentName] = useState("");
   const [componentDate, setComponentDate] = useState("");
-  const [componentCurrency, setComponentCurrency] = useState("AVAX");
+  const [componentEndDate, setComponentEndDate] = useState("");
+  const [componentCurrency, setComponentCurrency] = useState("USDC");
   const [componentGoal, setComponentGoal] = useState(10000);
   const [loading, setLoading] = useState(false);
   const [builded, setBuilded] = useState(false);
@@ -46,6 +47,7 @@ const CreateFunding = (props) => {
     await createDAO({
       name: componentName,
       date: componentDate,
+      endDate: componentEndDate,
       currency: componentCurrency,
       goal: componentGoal,
     });
@@ -82,12 +84,14 @@ const CreateFunding = (props) => {
           initialValues={{
             name: componentName,
             date: componentDate,
+            endDate: componentEndDate,
             currency: componentCurrency,
             goal: componentGoal,
           }}
           onValuesChange={onFormLayoutChange}
           name={componentName}
           date={componentDate}
+          endDate={componentEndDate}
           currency={componentCurrency}
           goal={componentGoal}
           onFinish={onFinish}
@@ -106,14 +110,19 @@ const CreateFunding = (props) => {
           >
             <Radio.Group>
               <Radio.Button value="USDC">USDC</Radio.Button>
-              <Radio.Button value="AVAX">AVAX</Radio.Button>
-              <Radio.Button value="ETC">ETC</Radio.Button>
             </Radio.Group>
           </Form.Item>
           <Form.Item
-            rules={[{ required: true, message: "Please input a funding period" }]}
+            rules={[{ required: true, message: "Please input a start date." }]}
             name="date"
             label="Funding Period starts"
+          >
+            <DatePicker />
+          </Form.Item>
+          <Form.Item
+            rules={[{ required: true, message: "Please input a end date." }]}
+            name="endDate"
+            label="Funding Period end"
           >
             <DatePicker />
           </Form.Item>

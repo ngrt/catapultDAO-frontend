@@ -10,7 +10,6 @@ export default function Home(props) {
   const {
       initWeb3Modal,
       loading,
-      web3,
   } = useContext(Web3Context);
 
   return (

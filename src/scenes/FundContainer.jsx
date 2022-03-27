@@ -49,7 +49,7 @@ export default function FundContainer(props) {
         style={styles.card}
         title={
           <>
-            📝 <Text strong>Funding Periode</Text>
+            📝 <Text strong>Fundings in progress</Text>
           </>
         }
       >
@@ -73,15 +73,12 @@ export default function FundContainer(props) {
         style={styles.card}
         title={
           <>
-            📝 <Text strong>Funded</Text>
+            📝 <Text strong>Fundings done</Text>
           </>
         }
       >
-        <Link to="/fund/id3">
-          <Card type="inner" title="Funded 1">
-            Inner
-          </Card>
-        </Link>
+        <div>Nothing to display</div>
+        
       </Card>
     </div>
   );
