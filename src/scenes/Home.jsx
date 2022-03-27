@@ -31,18 +31,21 @@ export default function Home(props) {
         <Title>Welcome to CatapultDAO</Title>        
       </div>
       {!loading && props.isLogged && (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <Link to="/create-funding">
-            <Button>Create a Funding</Button>
-          </Link>
-          <Link to="/fund">
-            <Button>Fund Page</Button>
-          </Link>
+        <div>
+          <div 
+            style={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Link to="/create-funding">
+              <Button>Create a Funding</Button>
+            </Link>
+            <Link to="/fund">
+              <Button>Fund Page</Button>
+            </Link>
+          </div>
+            <Title level={4} style={{ textAlign: 'center', marginTop: '15px' }}>You are connected</Title>
         </div>
       )}
       {!loading && !props.isLogged && (

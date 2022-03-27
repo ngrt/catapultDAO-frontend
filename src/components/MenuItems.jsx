@@ -9,6 +9,7 @@ function MenuItems() {
     <Menu
       theme="light"
       mode="horizontal"
+      selectable={false}
       style={{
         display: "flex",
         fontSize: "17px",
@@ -17,7 +18,6 @@ function MenuItems() {
         justifyContent: "center",
         maxWidth: "500px",
       }}
-      defaultSelectedKeys={[pathname]}
     >
       <Menu.Item key="/">
         <NavLink to="/">Home</NavLink>

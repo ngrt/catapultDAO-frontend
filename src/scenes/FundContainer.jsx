@@ -1,6 +1,7 @@
 import { Card, Typography } from "antd";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, Redirect } from "react-router-dom";
+import Web3Context from "../store/web3Context";
 
 const { Text } = Typography;
 
@@ -25,6 +26,9 @@ const styles = {
 export default function FundContainer(props) {
   const [redirctTo, setRedirctTo] = useState(false);
   const isLogged = props.isLogged;
+  const {
+      investment,
+  } = useContext(Web3Context);
 
   useEffect(() => {
     if (!isLogged) {
@@ -54,16 +58,15 @@ export default function FundContainer(props) {
           flexWrap: "wrap",
           flexDirection: "column",
         }}>
-          <Link to="/fund/id1">
-            <Card type="inner" title="Funding 1">
-              Inner
-            </Card>
-          </Link>
-          <Link to="/fund/id2">
-            <Card type="inner" title="Funding 2">
-              Inner
-            </Card>
-          </Link>
+          {investment && (
+            <Link to={"/fund/" + investment}>
+              <Card type="inner" title="Funding 1">
+                {investment}
+              </Card>
+            </Link>
+          )}
+          {!investment && <div>Nothing to display</div>}
+
         </div>
       </Card>
       <Card

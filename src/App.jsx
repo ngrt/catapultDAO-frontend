@@ -51,8 +51,6 @@ function App() {
         web3,
         signer,
         initWeb3Modal,
-        //approve,
-        //loading,
         createDAO,
         investment
     } = useContext(Web3Context);

@@ -28,6 +28,7 @@ export const Web3ContextProvider = (props) => {
     const [investmentDAO, setInvestmentDAO] = useState(null);
     const [factoryContract, setFactoryContract] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [loadingDAO, setLoadingDAO] = useState(false);
 
     useEffect(() => {
         const initData = async () => {
@@ -127,12 +128,15 @@ export const Web3ContextProvider = (props) => {
         }
     }
 
-    const createDAO = async () => {
+    const createDAO = async (data) => {
         try {
+            setLoadingDAO(true);
+            console.log({ data });
             await factoryContract.createDAOFunding(10);
         } catch (e) {
             console.log(e);
         }
+        setLoadingDAO(false);
     }
 
     const approve = async () => {
@@ -147,6 +151,7 @@ export const Web3ContextProvider = (props) => {
                 investmentDAO,
                 factoryContract,
                 loading,
+                loadingDAO,
                 approve,
                 initWeb3Modal,
                 createDAO,
