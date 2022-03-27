@@ -1,6 +1,6 @@
 import { Card, Typography } from "antd";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, Redirect } from "react-router-dom";
 
 const { Text } = Typography;
 
@@ -22,8 +22,17 @@ const styles = {
   },
 };
 
-export default function FundContainer() {
-  return (
+export default function FundContainer(props) {
+  const [redirctTo, setRedirctTo] = useState(false);
+  const isLogged = props.isLogged;
+
+  useEffect(() => {
+    if (!isLogged) {
+      setRedirctTo(true);
+    }
+  }, [isLogged]);
+
+  const render = (
     <div
       style={{
         display: "flex",
@@ -73,4 +82,6 @@ export default function FundContainer() {
       </Card>
     </div>
   );
+
+  return redirctTo ? <Redirect to="/" /> : render;
 }

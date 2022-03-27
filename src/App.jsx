@@ -10,17 +10,17 @@ import {
 } from "react-router-dom";
 
 import "antd/dist/antd.css";
-import { Layout } from "antd";
-import Text from "antd/lib/typography/Text";
+import { Layout, Typography } from "antd";
 import logo from "./assets/favicon-80x80.png";
 
 import MenuItems from "./components/MenuItems";
-import FundContainer from "./components/FundContainer";
-import Home from "./components/Home";
-import Fund from "./components/Fund";
-import CreateFunding from "./components/CreateFunding";
+import FundContainer from "./scenes/FundContainer";
+import Home from "./scenes/Home";
+import Fund from "./scenes/Fund";
+import CreateFunding from "./scenes/CreateFunding";
 
 const { Header, Footer } = Layout;
+const { Text, Title } = Typography;
 
 const styles = {
   content: {
@@ -56,6 +56,7 @@ function App() {
         createDAO,
         investment
     } = useContext(Web3Context);
+    const isLogged = (web3 && signer);
 
   /*return (
     <div className="App">
@@ -70,25 +71,26 @@ function App() {
     <Layout style={{ height: "100vh", overflow: "auto" }}>
       <Router>
         <Header style={styles.header}>
-          <Link to="/">
+          <Link to="/" style={{ display: "flex", alignItems: "center" }}>
             <img src={logo} alt="logo" width="60" height="60" />
+            <Title level={5}>CatapultDAO</Title>
           </Link>
-          <MenuItems />
+          <MenuItems isLogged={isLogged} />
         </Header>
 
         <div style={styles.content}>
           <Switch>
             <Route exact path="/">
-              <Home />
+              <Home isLogged={isLogged} />
             </Route>
             <Route exact path="/fund">
-              <FundContainer />
+              <FundContainer isLogged={isLogged} />
             </Route>
             <Route exact path='/fund/:id'>
-              <Fund />
+              <Fund isLogged={isLogged} />
             </Route>
             <Route exact path="/create-funding">
-              <CreateFunding />
+              <CreateFunding isLogged={isLogged} />
             </Route>
             <Route path="/nonauthenticated">
               <>Please login using the "Authenticate" button</>

@@ -1,7 +1,7 @@
 import { Card, Button, Typography } from "antd";
-import React from "react";
-import { Link, useParams } from "react-router-dom";
-import TableInvestors from "./TableInvestors";
+import React, { useState, useEffect } from "react";
+import { Redirect, Link, useParams } from "react-router-dom";
+import TableInvestors from "../components/TableInvestors";
 
 const { Text, Title } = Typography;
 
@@ -23,10 +23,18 @@ const styles = {
   },
 };
 
-export default function Fund() {
+export default function Fund(props) {
+  const [redirctTo, setRedirctTo] = useState(false);
   const { id } = useParams();
+  const isLogged = props.isLogged;
 
-  return (
+  useEffect(() => {
+    if (!isLogged) {
+      setRedirctTo(true);
+    }
+  }, [isLogged]);
+
+  const render = (
     <div
       style={{
         display: "flex",
@@ -81,4 +89,6 @@ export default function Fund() {
       </Card>
     </div>
   );
+
+  return redirctTo ? <Redirect to="/" /> : render;
 }

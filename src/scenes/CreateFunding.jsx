@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import {
   Form,
   Input,
@@ -9,12 +10,20 @@ import {
   Card,
 } from "antd";
 
-const CreateFunding = () => {
+const CreateFunding = (props) => {
+  const [redirctTo, setRedirctTo] = useState(false);
   const [componentName, setComponentName] = useState("");
   const [componentDate, setComponentDate] = useState("");
   const [componentCurrency, setComponentCurrency] = useState("AVAX");
   const [componentGoal, setComponentGoal] = useState(10000);
   const [loading, setLoading] = useState(false);
+  const isLogged = props.isLogged;
+
+  useEffect(() => {
+    if (!isLogged) {
+      setRedirctTo(true);
+    }
+  }, [isLogged]);
 
   const onFormLayoutChange = ({ name, date, currency, goal }) => {
     setComponentName(name);
@@ -39,7 +48,7 @@ const CreateFunding = () => {
     return () => clearTimeout(timeout);
   }, [loading]);
 
-  return (
+  const render = (
     <Card title="Create a Funding" bordered={false} style={{ width: 600 }}>
       <Form
         labelCol={{
@@ -74,7 +83,7 @@ const CreateFunding = () => {
           label="Currency"
           name="currency"
         >
-          <Radio.Group defaultValue={"AVAX"}>
+          <Radio.Group>
             <Radio.Button value="USDC">USDC</Radio.Button>
             <Radio.Button value="AVAX">AVAX</Radio.Button>
             <Radio.Button value="ETC">ETC</Radio.Button>
@@ -109,6 +118,8 @@ const CreateFunding = () => {
       </Form>
     </Card>
   );
+
+  return redirctTo ? <Redirect to="/" /> : render;
 };
 
 export default CreateFunding;

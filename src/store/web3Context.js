@@ -50,7 +50,6 @@ export const Web3ContextProvider = (props) => {
                     InvestmentFactory.abi,
                     provider);
 
-                setWeb3(provider);
                 setFactoryContract(investmentFactory);
             } catch (e) {
                 console.log(e);
@@ -61,6 +60,18 @@ export const Web3ContextProvider = (props) => {
 
         !web3 && initUrlWeb3()
     }, [web3]);
+
+    const disconnect = async () => {
+        try {
+            if (web3.close) {
+                await web3.close();
+                await Web3Modal.clearCachedProvider();
+                setWeb3(null);
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
     const initWeb3Modal = async () => {
         try {
@@ -99,6 +110,7 @@ export const Web3ContextProvider = (props) => {
             setWeb3(provider);
             setSigner(signer);
             setFactoryContract(investmentFactory);
+
         } catch (e) {
             console.log(e);
         } finally {
