@@ -36,7 +36,7 @@ The `hh run scripts/deploy.ts --network fuji` do(todo)...
 
 #### Front
 ```bash
-cd catapult-dao/frontend
+cd catapultDAO-frontend
 npm install
 npm start
 ```
@@ -48,3 +48,22 @@ The `npm start` command builds the website locally and serves it through a devel
 You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
 
 
+#### Connect with Local Server
+
+Launch the node
+```bash
+cd catapult-dao
+export FUJI_PRIVATE_KEY="YOUR_FUJI_KEY"
+npx hardhat node
+```
+Now running on localhost:8545
+
+Launch your deploy, in another terminal
+```bash
+cd catapult-dao
+export FUJI_PRIVATE_KEY="YOUR_FUJI_KEY"
+npx hardhat run --network local scripts/deploy.ts
+```
+
+Copy the address of the contract deployed in the Front, on the FACTORY_ADDRESS in PROD Object from catapultDAO-frontend/src/config.js.
+Copy the json of the contract(s) builded in catapult-dao/artifacts to catapultDAO-frontend/src/contracts

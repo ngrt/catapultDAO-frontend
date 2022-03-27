@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Catapult-DAO',
-  tagline: 'Catapult your project',
+  tagline: 'Catapult your fund rising',
   url: 'http://localhost:3001/',
   baseUrl: '/',
   onBrokenLinks: 'throw',
